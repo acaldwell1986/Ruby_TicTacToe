@@ -9,8 +9,6 @@ class Board; end
 
 module CheckWinner; end
 
-def generate_board; end
-
 def greeting
   puts 'Hello - Welcome to Ruby Tic Tac Toe!'
   sleep(1)
@@ -54,15 +52,31 @@ def symbol_selection
   selection
 end
 
+def generate_board
+  board = [
+    ['-', '-', '-'],
+    ['-', '-', '-'],
+    ['-', '-', '-']
+  ]
+  
+  board.each_with_index do |row, row_index|
+    row.each_with_index do |value, column_index|
+      p "Row:#{row_index} Column:#{column_index} && value = #{value}"
+    end
+  end
+
+  sleep(5)
+end
+
 # method for running the game
 # commented out are the helper methods
 def game
   greeting
   player_type = player_selection
   symbol_type = symbol_selection
-  # generate_board
+  generate_board
   # start_play_loop
-  goodbye
+  # goodbye
 end
 
 game
