@@ -1,13 +1,11 @@
 require 'io/console'
 require 'io/wait'
 
-def clear_stdin
-  $stdin.getc while $stdin.ready?
-end
-
 class Board; end
 
 module CheckWinner; end
+
+$board = Array.new(2) { Array.new(2) }
 
 def greeting
   puts 'Hello - Welcome to Ruby Tic Tac Toe!'
@@ -18,6 +16,10 @@ def greeting
   print "            \r"
   system 'clear'
   clear_stdin # clears STDIN so that no input carries over into player_selection method
+end
+
+def clear_stdin
+  $stdin.getc while $stdin.ready?
 end
 
 def player_selection
@@ -53,19 +55,26 @@ def symbol_selection
 end
 
 def generate_board
-  board = [
+  $board = [
     ['-', '-', '-'],
     ['-', '-', '-'],
     ['-', '-', '-']
   ]
-  
-  board.each_with_index do |row, row_index|
-    row.each_with_index do |value, column_index|
-      p "Row:#{row_index} Column:#{column_index} && value = #{value}"
-    end
-  end
 
+  print_board
   sleep(5)
+end
+
+def print_board
+  puts '     |     |     '
+  puts "  #{$board[0][0]}  |  #{$board[0][1]}  |  #{$board[0][2]}  "
+  puts "_____|_____|_____"
+  puts '     |     |     '
+  puts "  #{$board[1][0]}  |  #{$board[1][1]}  |  #{$board[1][2]}  "
+  puts "_____|_____|_____"
+  puts '     |     |     '
+  puts "  #{$board[2][0]}  |  #{$board[2][1]}  |  #{$board[2][2]}  "
+  puts '     |     |     '
 end
 
 # method for running the game
