@@ -1,31 +1,6 @@
 require 'io/console'
 require 'io/wait'
 
-# Class to generate boards.
-class Board
-  @boards = 0
-
-  def initialize
-    @board = [
-      ['-', '-', '-'],
-      ['-', '-', '-'],
-      ['-', '-', '-']
-    ]
-
-    @boards =+ 1
-  end
-
-  def give_board
-    @board
-  end
-
-  def number_of_boards
-    @boards
-  end
-end
-
-module CheckWinner; end
-
 def greeting
   puts 'Hello - Welcome to Ruby Tic Tac Toe!'
   sleep(1)
@@ -63,7 +38,7 @@ def goodbye
 end
 
 def symbol_selection
-  puts 'What symbol would you like to use? (X or O)'
+  puts 'What symbol would you like to use for Player 1? (X or O)'
   puts 'Press X or O to select.'
   selection = ''
   while selection.upcase != 'X' && selection.upcase != 'O' do
@@ -76,13 +51,100 @@ end
 def print_board(display_board)
   puts '     |     |     '
   puts "  #{display_board[0][0]}  |  #{display_board[0][1]}  |  #{display_board[0][2]}  "
-  puts "_____|_____|_____"
+  puts '_____|_____|_____'
   puts '     |     |     '
   puts "  #{display_board[1][0]}  |  #{display_board[1][1]}  |  #{display_board[1][2]}  "
-  puts "_____|_____|_____"
+  puts '_____|_____|_____'
   puts '     |     |     '
   puts "  #{display_board[2][0]}  |  #{display_board[2][1]}  |  #{display_board[2][2]}  "
   puts '     |     |     '
+end
+
+# Class to generate boards.
+class Board
+  @@boards = 0
+
+  def initialize
+    @board = [
+      ['-', '-', '-'],
+      ['-', '-', '-'],
+      ['-', '-', '-']
+    ]
+    @@boards += 1
+  end
+
+  def give_board
+    @board
+  end
+
+  def number_of_boards
+    @@boards
+  end
+
+  def update_board(position, symbol)
+    case position
+    when '1'
+      if @board[0][0] == '-'
+        @board[0][0] = symbol
+      else
+        return 0
+      end
+    when '2'
+      if @board[0][1] == '-'
+        @board[0][1] = symbol
+      else
+        return 0
+      end
+    when '3'
+      if @board[0][2] == '-'
+        @board[0][2] = symbol
+      else
+        return 0
+      end
+    when '4'
+      if @board[1][0] == '-'
+        @board[1][0] = symbol
+      else
+        return 0
+      end
+    when '5'
+      if @board[1][1] == '-'
+        @board[1][1] = symbol
+      else
+        return 0
+      end
+    when '6'
+      if @board[1][2] == '-'
+        @board[1][2] = symbol
+      else
+        return 0
+      end
+    when '7'
+      if @board[2][0] == '-'
+        @board[2][0] = symbol
+      else
+        return 0
+      end
+    when '8'
+      if @board[2][1] == '-'
+        @board[2][1] = symbol
+      else
+        return 0
+      end
+    when '9'
+      if @board[2][2] == '-'
+        @board[2][2] = symbol
+      else
+        return 0
+      end
+    else
+      p "Error"
+    end
+  end
+end
+
+def start_play_loop_VS(symbol_type, board)
+
 end
 
 # method for running the game
@@ -93,9 +155,10 @@ def game
   symbol_type = symbol_selection
   board = Board.new
   print_board(board.give_board)
-  p board.number_of_boards
-  # start_play_loop
-  # goodbye
+  board.update_board('2','X') # example of updating board
+  print_board(board.give_board)
+  # start_play_loop_VS(symbol_type, board)
+  goodbye
 end
 
 game
