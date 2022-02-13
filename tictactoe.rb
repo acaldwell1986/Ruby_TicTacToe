@@ -1,11 +1,30 @@
 require 'io/console'
 require 'io/wait'
 
-class Board; end
+# Class to generate boards.
+class Board
+  @boards = 0
+
+  def initialize
+    @board = [
+      ['-', '-', '-'],
+      ['-', '-', '-'],
+      ['-', '-', '-']
+    ]
+
+    @boards =+ 1
+  end
+
+  def give_board
+    @board
+  end
+
+  def number_of_boards
+    @boards
+  end
+end
 
 module CheckWinner; end
-
-$board = Array.new(2) { Array.new(2) }
 
 def greeting
   puts 'Hello - Welcome to Ruby Tic Tac Toe!'
@@ -54,26 +73,15 @@ def symbol_selection
   selection
 end
 
-def generate_board
-  $board = [
-    ['-', '-', '-'],
-    ['-', '-', '-'],
-    ['-', '-', '-']
-  ]
-
-  print_board
-  sleep(5)
-end
-
-def print_board
+def print_board(display_board)
   puts '     |     |     '
-  puts "  #{$board[0][0]}  |  #{$board[0][1]}  |  #{$board[0][2]}  "
+  puts "  #{display_board[0][0]}  |  #{display_board[0][1]}  |  #{display_board[0][2]}  "
   puts "_____|_____|_____"
   puts '     |     |     '
-  puts "  #{$board[1][0]}  |  #{$board[1][1]}  |  #{$board[1][2]}  "
+  puts "  #{display_board[1][0]}  |  #{display_board[1][1]}  |  #{display_board[1][2]}  "
   puts "_____|_____|_____"
   puts '     |     |     '
-  puts "  #{$board[2][0]}  |  #{$board[2][1]}  |  #{$board[2][2]}  "
+  puts "  #{display_board[2][0]}  |  #{display_board[2][1]}  |  #{display_board[2][2]}  "
   puts '     |     |     '
 end
 
@@ -83,7 +91,9 @@ def game
   greeting
   player_type = player_selection
   symbol_type = symbol_selection
-  generate_board
+  board = Board.new
+  print_board(board.give_board)
+  p board.number_of_boards
   # start_play_loop
   # goodbye
 end
