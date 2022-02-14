@@ -143,6 +143,19 @@ class Board
   end
 end
 
+def check_winner(board)
+  board.give_board.each do |row|
+    if row == ["X", "X", "X"] || row == ["O", "O", "O"]
+      puts "Winner"
+    else
+      puts "Loser"
+    end
+  end
+
+  
+
+end
+
 def start_play_loop_VS(symbol_type, board)
 
 end
@@ -154,11 +167,13 @@ def game
   player_type = player_selection
   symbol_type = symbol_selection
   board = Board.new
-  print_board(board.give_board)
-  board.update_board('2','X') # example of updating board
-  print_board(board.give_board)
+  # print_board(board.give_board)
+  # board.update_board('2','X') # example of updating board
+  # print_board(board.give_board)
+  check_winner(board)
+  sleep(3)
   # start_play_loop_VS(symbol_type, board)
-  goodbye
+  # goodbye
 end
 
 game
